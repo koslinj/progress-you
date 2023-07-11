@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color: white;
+    @apply bg-gradient-to-b from-slate-950 to-fuchsia-950 pb-10;
+    min-height: 100vh;
+  }
+
+  html{
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+    /* for Firefox */
+    overflow-y: scroll;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+}
+
+@layer components {
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
+  .km-input,
+  .km-input:focus {
+    @apply bg-slate-800 border-none text-4xl text-center w-24 py-4;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .date-input,
+  .date-input:focus {
+    @apply bg-slate-800 border-none text-2xl text-center w-48 py-4 rounded-xl;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .text-input,
+  .text-input:focus {
+    @apply bg-slate-800 border-none text-3xl text-center w-72 py-4 rounded-xl;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .star {
+    width: 50px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .star.filled {
+    transform: scale(1.15);
+  }
+}
