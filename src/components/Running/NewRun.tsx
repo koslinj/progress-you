@@ -7,11 +7,12 @@ import dateIcon from '../../icons/date_icon.png'
 import addIcon from '../../icons/add_icon.png'
 import { useTheme } from "../../context/ThemeContext";
 import { RunType } from "../../context/RunsContext";
+import { ToastContainer, toast } from "react-toastify";
 
 const NewRun = () => {
     const [kilometers, setKilometers] = useState(10)
     const [hours, setHours] = useState(0)
-    const [minutes, setMinutes] = useState(52)
+    const [minutes, setMinutes] = useState(30)
 
     let objectDate = new Date('2023-7-21');
     let day = objectDate.getDate();
@@ -27,7 +28,7 @@ const NewRun = () => {
         try {
             const toAdd: RunType = {
                 km: kilometers,
-                minutes: hours*60 + minutes,
+                minutes: hours * 60 + minutes,
                 day: date
             }
             await addDoc(collection(db, "runs"), toAdd);
@@ -36,15 +37,63 @@ const NewRun = () => {
         }
     }
 
+    const handleDecreaseHours = () => {
+        if (hours === 0) {
+            return toast.error('You cannot put negative amount of hours!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark"
+            });
+        }
+        setHours(prev => prev - 1)
+    }
+
+    const handleDecreaseMinutes = () => {
+        if (minutes === 0) {
+            return toast.error('You cannot put negative amount of minutes!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark"
+            });
+        }
+        setMinutes(prev => prev - 1)
+    }
+
+    const handleDecreaseKilometers = () => {
+        if (kilometers === 0) {
+            return toast.error('You cannot put negative amount of kilometers!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark"
+            });
+        }
+        setKilometers(prev => prev - 1)
+    }
+
     return (
         <form onSubmit={handleNewRun} className={`${color} p-6 rounded-2xl flex justify-center gap-20 flex-wrap mt-12`}>
             <div>
-                <div className="flex justify-between gap-8">
+                <div className="flex justify-between items-center gap-8">
                     <img src={distanceIcon} alt="Distance Icon" className="w-16" />
-                    <div className="flex justify-center items-center bg-slate-900 rounded-xl">
-                        <div onClick={() => setKilometers(prev => prev - 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
-                        <input className="km-input" type="number" value={kilometers.toString()} onChange={(e) => setKilometers(Number(e.target.value))}></input>
-                        <div onClick={() => setKilometers(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
+                    <div className="flex flex-col items-center">
+                        <p className="font-lora text-xl">Kilometers</p>
+                        <div className="flex justify-center items-center bg-slate-900 rounded-xl">
+                            <div onClick={handleDecreaseKilometers} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                            <input className="km-input" type="number" value={kilometers.toString()} onChange={(e) => setKilometers(Number(e.target.value))}></input>
+                            <div onClick={() => setKilometers(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
+                        </div>
                     </div>
                 </div>
                 <div className="flex justify-between items-center gap-8 mt-8">
@@ -52,13 +101,13 @@ const NewRun = () => {
                     <div className="flex flex-col items-center">
                         <p className="font-lora text-xl">Hours</p>
                         <div className="flex justify-center items-center bg-slate-900 rounded-xl">
-                            <div onClick={() => setHours(prev => prev - 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                            <div onClick={handleDecreaseHours} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                             <input className="km-input" type="number" value={hours.toString()} onChange={(e) => setHours(Number(e.target.value))}></input>
                             <div onClick={() => setHours(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                         </div>
                         <p className="mt-4 font-lora text-xl">Minutes</p>
                         <div className="flex justify-center items-center bg-slate-900 rounded-xl">
-                            <div onClick={() => setMinutes(prev => prev - 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                            <div onClick={handleDecreaseMinutes} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                             <input className="km-input" type="number" value={minutes.toString()} onChange={(e) => setMinutes(Number(e.target.value))}></input>
                             <div onClick={() => setMinutes(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                         </div>
@@ -76,6 +125,7 @@ const NewRun = () => {
                     <img className="w-20" src={addIcon} alt="Add Icon" />
                 </div>
             </div>
+            <ToastContainer />
         </form>
     )
 }

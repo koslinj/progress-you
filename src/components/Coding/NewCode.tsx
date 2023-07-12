@@ -6,11 +6,12 @@ import timerIcon from '../../icons/timer_icon.png'
 import addIcon from '../../icons/add_icon.png'
 import { useTheme } from '../../context/ThemeContext'
 import StarRating from './StarRating'
-
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const NewCode = () => {
     const [hours, setHours] = useState(0)
-    const [minutes, setMinutes] = useState(52)
+    const [minutes, setMinutes] = useState(30)
     const [language, setLanguage] = useState('')
     const [difficulty, setDifficulty] = useState<DifficultyType>(3)
 
@@ -18,6 +19,17 @@ const NewCode = () => {
 
     const handleNewCode = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (language.length === 0) {
+            return toast.error('You have to put programming language!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark"
+            });
+        }
         try {
             const toAdd: CodeType = {
                 minutes: hours * 60 + minutes,
@@ -28,6 +40,36 @@ const NewCode = () => {
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+    }
+
+    const handleDecreaseHours = () => {
+        if (hours === 0) {
+            return toast.error('You cannot put negative amount of hours!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark"
+            });
+        }
+        setHours(prev => prev - 1)
+    }
+
+    const handleDecreaseMinutes = () => {
+        if (minutes === 0) {
+            return toast.error('You cannot put negative amount of minutes!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark"
+            });
+        }
+        setMinutes(prev => prev - 1)
     }
 
     return (
@@ -41,13 +83,13 @@ const NewCode = () => {
                 <div className="flex flex-col items-center">
                     <p className="font-lora text-xl">Hours</p>
                     <div className="flex justify-center items-center bg-slate-900 rounded-xl">
-                        <div onClick={() => setHours(prev => prev - 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                        <div onClick={handleDecreaseHours} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                         <input className="km-input" type="number" value={hours.toString()} onChange={(e) => setHours(Number(e.target.value))}></input>
                         <div onClick={() => setHours(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                     </div>
                     <p className="mt-4 font-lora text-xl">Minutes</p>
                     <div className="flex justify-center items-center bg-slate-900 rounded-xl">
-                        <div onClick={() => setMinutes(prev => prev - 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                        <div onClick={handleDecreaseMinutes} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                         <input className="km-input" type="number" value={minutes.toString()} onChange={(e) => setMinutes(Number(e.target.value))}></input>
                         <div onClick={() => setMinutes(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                     </div>
@@ -58,6 +100,7 @@ const NewCode = () => {
             <div onClick={handleNewCode} className="bg-slate-800 rounded-full mt-8 p-6 hover:scale-125 duration-300 cursor-pointer">
                 <img className="w-20" src={addIcon} alt="Add Icon" />
             </div>
+            <ToastContainer />
         </form>
     )
 }

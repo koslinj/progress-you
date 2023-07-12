@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --toastify-color-dark: #000000;
+}
+
 @layer base {
 
   *,
@@ -12,7 +16,7 @@
 
   html {
     color: white;
-    @apply bg-gradient-to-b from-slate-950 to-fuchsia-950 pb-10;
+    @apply bg-gradient-to-b from-fuchsia-950 to-slate-950 pb-10;
     min-height: 100vh;
   }
 

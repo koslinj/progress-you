@@ -27,7 +27,7 @@ const NavIcons = ({ setActivity, setPosition, storedPosition }: PropsType) => {
     return (
         <>
             <img
-                className='z-10 h-12 absolute top-4 left-4 transition-all'
+                className='z-10 h-12 absolute top-4 left-4 transition-all cursor-pointer'
                 onClick={(event: React.MouseEvent<HTMLImageElement>) => {
                     animateToIcon(event)
                     setActivity('home')
@@ -37,7 +37,7 @@ const NavIcons = ({ setActivity, setPosition, storedPosition }: PropsType) => {
                 alt='Home Icon'
             />
             <img
-                className='z-10 h-12 transition-all'
+                className='z-10 h-12 transition-all cursor-pointer'
                 onClick={(event: React.MouseEvent<HTMLImageElement>) => {
                     animateToIcon(event)
                     setActivity('coding')
@@ -47,7 +47,7 @@ const NavIcons = ({ setActivity, setPosition, storedPosition }: PropsType) => {
                 alt='Coding Icon'
             />
             <img
-                className='z-10 h-12 transition-all'
+                className='z-10 h-12 transition-all cursor-pointer'
                 onClick={(event: React.MouseEvent<HTMLImageElement>) => {
                     animateToIcon(event)
                     setActivity('running')
