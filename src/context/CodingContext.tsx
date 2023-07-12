@@ -2,11 +2,12 @@ import { ReactElement, createContext, useContext, useEffect, useState } from "re
 import { db } from "../firebase"
 import { collection, onSnapshot } from "firebase/firestore"
 
-export type DifficultyType = 1|2|3|4|5
+export type DifficultyType = 1 | 2 | 3 | 4 | 5
 export type CodeType = {
     minutes: number
-    language: String
+    language: string
     difficulty: DifficultyType
+    day: string
 }
 
 const useCodingContext = () => {
@@ -20,11 +21,17 @@ const useCodingContext = () => {
                 const coding: CodeType = {
                     minutes: codingData.minutes,
                     language: codingData.language,
-                    difficulty: codingData.difficulty
+                    difficulty: codingData.difficulty,
+                    day: codingData.day
                 };
                 data.push(coding);
             });
-            setCoding(data);
+            const sorted = data.sort((a, b) => {
+                const date_a = new Date(a.day).getTime()
+                const date_b = new Date(b.day).getTime()
+                return date_a - date_b
+            })
+            setCoding(sorted);
         });
 
         // Cleanup the listener when the component unmounts or when the dependency array changes
@@ -43,7 +50,7 @@ const CodingContext = createContext<valueType | null>(null)
 type PropsType = {
     children: ReactElement | ReactElement[]
 }
-export const CodingProvider = ({children}: PropsType) => {
+export const CodingProvider = ({ children }: PropsType) => {
     return (
         <CodingContext.Provider value={useCodingContext()}>
             {children}
@@ -54,7 +61,7 @@ export const CodingProvider = ({children}: PropsType) => {
 export const useCoding = () => {
     const context = useContext(CodingContext)
 
-    if(context === null){
+    if (context === null) {
         throw new Error('There is no provider for CodingContext')
     }
 

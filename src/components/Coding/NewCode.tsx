@@ -4,6 +4,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
 import timerIcon from '../../icons/timer_icon.png'
 import addIcon from '../../icons/add_icon.png'
+import dateIcon from '../../icons/date_icon.png'
 import { useTheme } from '../../context/ThemeContext'
 import StarRating from './StarRating'
 import { toast, ToastContainer } from 'react-toastify';
@@ -14,6 +15,13 @@ const NewCode = () => {
     const [minutes, setMinutes] = useState(30)
     const [language, setLanguage] = useState('')
     const [difficulty, setDifficulty] = useState<DifficultyType>(3)
+
+    let objectDate = new Date('2023-7-21');
+    let day = objectDate.getDate();
+    let month = String(objectDate.getMonth() + 1).padStart(2, '0');
+    let year = objectDate.getFullYear();
+    let format = year + "-" + month + "-" + day
+    const [date, setDate] = useState(format)
 
     const { color } = useTheme()
 
@@ -34,7 +42,8 @@ const NewCode = () => {
             const toAdd: CodeType = {
                 minutes: hours * 60 + minutes,
                 language: language,
-                difficulty: difficulty
+                difficulty: difficulty,
+                day: date
             }
             await addDoc(collection(db, "coding"), toAdd);
         } catch (e) {
@@ -73,12 +82,12 @@ const NewCode = () => {
     }
 
     return (
-        <form onSubmit={handleNewCode} className={`${color} p-6 rounded-2xl flex flex-col items-center flex-wrap mt-12`}>
+        <form onSubmit={handleNewCode} className={`${color} p-6 rounded-2xl flex flex-col items-center flex-wrap mt-12 mx-2`}>
             <p className="font-lora text-xl">Language</p>
             <div>
                 <input onChange={(e) => setLanguage(e.target.value)} className='text-input' type='text'></input>
             </div>
-            <div className="flex justify-between items-center gap-8 mt-8">
+            <div className="flex justify-between items-center gap-8 mt-6">
                 <img src={timerIcon} alt="Distance Icon" className="w-16" />
                 <div className="flex flex-col items-center">
                     <p className="font-lora text-xl">Hours</p>
@@ -95,10 +104,16 @@ const NewCode = () => {
                     </div>
                 </div>
             </div>
-            <p className="mt-10 mb-2 font-lora text-xl">Difficulty</p>
+            <p className="mt-8 mb-2 font-lora text-xl">Difficulty</p>
             <StarRating difficulty={difficulty} setDifficulty={setDifficulty} />
+            <div className="flex justify-between gap-8 mt-10">
+                <img src={dateIcon} alt="Distance Icon" className="w-16" />
+                <div className="flex justify-center items-center">
+                    <input className="date-input" type='date' value={date} onChange={(e) => setDate(e.target.value)}></input>
+                </div>
+            </div>
             <div onClick={handleNewCode} className="bg-slate-800 rounded-full mt-8 p-6 hover:scale-125 duration-300 cursor-pointer">
-                <img className="w-20" src={addIcon} alt="Add Icon" />
+                <img className="w-20 invert" src={addIcon} alt="Add Icon" />
             </div>
             <ToastContainer />
         </form>

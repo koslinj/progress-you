@@ -5,7 +5,7 @@ import { db } from '../firebase';
 export type RunType = {
     km: number,
     minutes: number
-    day: String
+    day: string
 }
 
 
@@ -24,7 +24,12 @@ const useRunContext = () => {
                 };
                 data.push(run);
             });
-            setRuns(data);
+            const sorted = data.sort((a, b) => {
+                const date_a = new Date(a.day).getTime()
+                const date_b = new Date(b.day).getTime()
+                return date_a - date_b
+            })
+            setRuns(sorted);
         });
 
         // Cleanup the listener when the component unmounts or when the dependency array changes
