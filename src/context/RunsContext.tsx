@@ -10,7 +10,7 @@ export type RunType = {
 
 
 const useRunContext = () => {
-    const [runs, setRuns] = useState<RunType[] | null>(null)
+    const [runs, setRuns] = useState<RunType[]>([])
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, "runs"), (snapshot) => {
