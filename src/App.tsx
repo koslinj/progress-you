@@ -2,7 +2,7 @@ import { useState } from "react";
 import Running from "./components/Running/Running";
 import Coding from "./components/Coding/Coding";
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 
 export type ActivityType = 'running' | 'coding' | 'home'
 
