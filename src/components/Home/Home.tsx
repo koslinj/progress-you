@@ -4,6 +4,7 @@ import { useRuns } from "../../context/RunsContext"
 import Day from "./Day"
 import leftIcon from '../../icons/left.png'
 import rightIcon from '../../icons/right.png'
+import { ToastContainer, toast } from "react-toastify"
 
 export type DayOfActivity = {
     day: string
@@ -16,7 +17,8 @@ const Home = () => {
     const { coding } = useCoding()
     const { runs } = useRuns()
     const [lastDays, setLastDays] = useState<DayOfActivity[]>([])
-
+    const [diff, setDiff] = useState(0)
+    console.log(diff)
     const dates = useMemo(() => {
         const tempDates: DayOfActivity[] = []
         coding.forEach(item => {
@@ -62,7 +64,7 @@ const Home = () => {
             if (foundItem) {
                 tempLastDays.unshift({ day: foundItem.day, running: foundItem.running, coding: foundItem.coding, minutes: foundItem.minutes });
             } else {
-                const day = today.getDate();
+                const day = String(today.getDate()).padStart(2, '0');
                 const month = String(today.getMonth() + 1).padStart(2, '0');
                 const year = today.getFullYear();
                 const format = `${year}-${month}-${day}`;
@@ -74,21 +76,51 @@ const Home = () => {
         setLastDays(tempLastDays);
     }, [dates]);
 
+    const handleDecrease = () => {
+        if(diff===-25) return toast.error('You can only see past 30 days!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark"
+        });
+        setDiff(prev => prev - 5)
+    }
 
+    const handleIncrease = () => {
+        if(diff===0) return toast.error('There is nothing in the future!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark"
+        });
+        setDiff(prev => prev + 5)
+    }
 
     return (
-        <div className="mt-12 flex justify-between items-center mx-2 md:mx-8">
-            <div className="mr-4 w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-125 duration-300">
+        <div>
+            <div onClick={handleDecrease} className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-125 duration-300 absolute top-60 -translate-y-1/2 left-4">
                 <img className="w-8 md:w-16" src={leftIcon} alt="Left Icon" />
             </div>
-            <div className="flex justify-around items-center flex-wrap gap-4">
-                {lastDays.slice(-5).map((item, i) => {
+            <div className="flex justify-around items-center flex-wrap gap-4 mx-20 md:mx-28 mt-12">
+                {diff
+                ? lastDays.slice(-5 + diff, diff).map((item, i) => {
                     return <Day key={i} item={item} />
-                })}
+                })
+                : lastDays.slice(-5).map((item, i) => {
+                    return <Day key={i} item={item} />
+                })
+                }
             </div>
-            <div className="ml-4 w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-125 duration-300">
+            <div onClick={handleIncrease} className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-125 duration-300 absolute top-60 -translate-y-1/2 right-4">
                 <img className="w-8 md:w-16" src={rightIcon} alt="Right Icon" />
             </div>
+            <ToastContainer />
         </div>
     )
 }
