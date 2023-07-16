@@ -8,7 +8,7 @@ const Coding = () => {
 
   return (
     <div className='flex flex-col items-center'>
-      <h1 className='text-4xl mb-4 mt-2 italic font-lora'>Coding</h1>
+      <h1 className='text-4xl mb-4 mt-2 italic'>Coding</h1>
       <div className='flex justify-center items-center gap-8 flex-wrap'>
         {coding ? coding.map((code, i) => {
           return <Code key={i} code={code} />

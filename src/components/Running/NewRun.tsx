@@ -89,7 +89,7 @@ const NewRun = () => {
                     <div className="flex justify-between items-center gap-8">
                         <img src={distanceIcon} alt="Distance Icon" className="w-16" />
                         <div className="flex flex-col items-center">
-                            <p className="font-lora text-xl">Kilometers</p>
+                            <p className="text-xl">Kilometers</p>
                             <div className="flex justify-center items-center bg-slate-900 rounded-xl">
                                 <div onClick={handleDecreaseKilometers} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                                 <input className="km-input" type="number" value={kilometers.toString()} onChange={(e) => setKilometers(Number(e.target.value))}></input>
@@ -100,13 +100,13 @@ const NewRun = () => {
                     <div className="flex justify-between items-center gap-8 mt-8">
                         <img src={timerIcon} alt="Distance Icon" className="w-16" />
                         <div className="flex flex-col items-center">
-                            <p className="font-lora text-xl">Hours</p>
+                            <p className="text-xl">Hours</p>
                             <div className="flex justify-center items-center bg-slate-900 rounded-xl">
                                 <div onClick={handleDecreaseHours} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                                 <input className="km-input" type="number" value={hours.toString()} onChange={(e) => setHours(Number(e.target.value))}></input>
                                 <div onClick={() => setHours(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                             </div>
-                            <p className="mt-4 font-lora text-xl">Minutes</p>
+                            <p className="mt-4 text-xl">Minutes</p>
                             <div className="flex justify-center items-center bg-slate-900 rounded-xl">
                                 <div onClick={handleDecreaseMinutes} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                                 <input className="km-input" type="number" value={minutes.toString()} onChange={(e) => setMinutes(Number(e.target.value))}></input>

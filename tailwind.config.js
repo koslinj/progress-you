@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'lora': ['Ubuntu', 'sans-serif']
+        'orbitron': ['Orbitron', 'sans-serif']
       },
     },
   },

@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react"
 import { useCoding } from "../../context/CodingContext"
 import { useRuns } from "../../context/RunsContext"
 import Day from "./Day"
+import leftIcon from '../../icons/left.png'
+import rightIcon from '../../icons/right.png'
 
 export type DayOfActivity = {
     day: string
@@ -75,11 +77,17 @@ const Home = () => {
 
 
     return (
-        <div>
-            <div className="flex justify-around items-end flex-wrap mt-6 gap-4">
+        <div className="mt-12 flex justify-between items-center mx-2 md:mx-8">
+            <div className="mr-4 w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-125 duration-300">
+                <img className="w-8 md:w-16" src={leftIcon} alt="Left Icon" />
+            </div>
+            <div className="flex justify-around items-center flex-wrap gap-4">
                 {lastDays.slice(-5).map((item, i) => {
                     return <Day key={i} item={item} />
                 })}
+            </div>
+            <div className="ml-4 w-12 h-12 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-125 duration-300">
+                <img className="w-8 md:w-16" src={rightIcon} alt="Right Icon" />
             </div>
         </div>
     )

@@ -13,12 +13,12 @@ const Countdown = () => {
 
     return (
         <>
-            <p className='mt-16 italic font-lora text-2xl text-center'>Today:<br />{today.getDate()} / {today.getMonth() + 1} / {today.getFullYear()}</p>
+            <p className='mt-16 italic text-2xl text-center'>Today:<br />{today.getDate()} / {today.getMonth() + 1} / {today.getFullYear()}</p>
             <div className='w-4/5 flex-col justify-between items-center flex-wrap'>
                 <Progress progress={part} size='xl' color='red' />
                 <div className='flex justify-between'>
-                    <p className='italic font-lora text-xl text-center'>Start<br />{start.getDate()} / {start.getMonth() + 1} / {start.getFullYear()}</p>
-                    <p className='italic font-lora text-xl text-center'>Half-Marathon<br />{halfMarathonDate.getDate()} / {halfMarathonDate.getMonth() + 1} / {halfMarathonDate.getFullYear()}</p>
+                    <p className='italic text-xl text-center'>Start<br />{start.getDate()} / {start.getMonth() + 1} / {start.getFullYear()}</p>
+                    <p className='italic text-xl text-center'>Half-Marathon<br />{halfMarathonDate.getDate()} / {halfMarathonDate.getMonth() + 1} / {halfMarathonDate.getFullYear()}</p>
                 </div>
             </div>
         </>

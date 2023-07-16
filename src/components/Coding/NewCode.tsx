@@ -83,20 +83,20 @@ const NewCode = () => {
 
     return (
         <form onSubmit={handleNewCode} className={`${color} p-6 rounded-2xl flex flex-col items-center flex-wrap mt-12 mx-2`}>
-            <p className="font-lora text-xl">Language</p>
+            <p className="text-xl">Language</p>
             <div>
                 <input onChange={(e) => setLanguage(e.target.value)} className='text-input' type='text'></input>
             </div>
             <div className="flex justify-between items-center gap-8 mt-6">
                 <img src={timerIcon} alt="Distance Icon" className="w-16" />
                 <div className="flex flex-col items-center">
-                    <p className="font-lora text-xl">Hours</p>
+                    <p className="text-xl">Hours</p>
                     <div className="flex justify-center items-center bg-slate-900 rounded-xl">
                         <div onClick={handleDecreaseHours} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                         <input className="km-input" type="number" value={hours.toString()} onChange={(e) => setHours(Number(e.target.value))}></input>
                         <div onClick={() => setHours(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                     </div>
-                    <p className="mt-4 font-lora text-xl">Minutes</p>
+                    <p className="mt-4 text-xl">Minutes</p>
                     <div className="flex justify-center items-center bg-slate-900 rounded-xl">
                         <div onClick={handleDecreaseMinutes} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
                         <input className="km-input" type="number" value={minutes.toString()} onChange={(e) => setMinutes(Number(e.target.value))}></input>
@@ -104,7 +104,7 @@ const NewCode = () => {
                     </div>
                 </div>
             </div>
-            <p className="mt-8 mb-2 font-lora text-xl">Difficulty</p>
+            <p className="mt-8 mb-2 text-xl">Difficulty</p>
             <StarRating difficulty={difficulty} setDifficulty={setDifficulty} />
             <div className="flex justify-between gap-8 mt-10">
                 <img src={dateIcon} alt="Distance Icon" className="w-16" />
