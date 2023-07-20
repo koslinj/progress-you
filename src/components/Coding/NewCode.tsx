@@ -9,6 +9,7 @@ import { useTheme } from '../../context/ThemeContext'
 import StarRating from './StarRating'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { UserAuth } from '../../context/AuthContext'
 
 const NewCode = () => {
     const [hours, setHours] = useState(0)
@@ -25,6 +26,8 @@ const NewCode = () => {
 
     const { color } = useTheme()
 
+    const { user } = UserAuth();
+
     const handleNewCode = async (e: React.FormEvent) => {
         e.preventDefault()
         if (language.length === 0) {
@@ -39,13 +42,19 @@ const NewCode = () => {
             });
         }
         try {
-            const toAdd: CodeType = {
-                minutes: hours * 60 + minutes,
-                language: language,
-                difficulty: difficulty,
-                day: date
+            if (user) {
+                const toAdd: CodeType = {
+                    minutes: hours * 60 + minutes,
+                    language: language,
+                    difficulty: difficulty,
+                    day: date,
+                    userId: user.uid
+                }
+                await addDoc(collection(db, "coding"), toAdd);
             }
-            await addDoc(collection(db, "coding"), toAdd);
+            else {
+                throw new Error('User is not logged in!')
+            }
         } catch (e) {
             console.error("Error adding document: ", e);
         }

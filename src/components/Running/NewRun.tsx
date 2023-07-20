@@ -8,6 +8,7 @@ import addIcon from '../../icons/add_icon.png'
 import { useTheme } from "../../context/ThemeContext";
 import { RunType } from "../../context/RunsContext";
 import { ToastContainer, toast } from "react-toastify";
+import { UserAuth } from "../../context/AuthContext";
 
 const NewRun = () => {
     const [kilometers, setKilometers] = useState(10)
@@ -23,15 +24,23 @@ const NewRun = () => {
 
     const { color } = useTheme()
 
+    const { user } = UserAuth();
+
     const handleNewRun = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const toAdd: RunType = {
-                km: kilometers,
-                minutes: hours * 60 + minutes,
-                day: date
+            if (user) {
+                const toAdd: RunType = {
+                    km: kilometers,
+                    minutes: hours * 60 + minutes,
+                    day: date,
+                    userId: user.uid
+                }
+                await addDoc(collection(db, "runs"), toAdd);
             }
-            await addDoc(collection(db, "runs"), toAdd);
+            else {
+                throw new Error('User is not logged in!')
+            }
         } catch (e) {
             console.error("Error adding document: ", e);
         }

@@ -1,6 +1,8 @@
 import { ReactElement, createContext, useContext, useEffect, useState } from "react"
 import { db } from "../firebase"
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, query, where } from "firebase/firestore"
+import { UserAuth } from "./AuthContext"
+import { Unsubscribe } from "firebase/auth"
 
 export type DifficultyType = 1 | 2 | 3 | 4 | 5
 export type CodeType = {
@@ -8,37 +10,44 @@ export type CodeType = {
     language: string
     difficulty: DifficultyType
     day: string
+    userId: string
 }
 
 const useCodingContext = () => {
     const [coding, setCoding] = useState<CodeType[]>([])
+    const { user } = UserAuth();
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "coding"), (snapshot) => {
-            const data: CodeType[] = []
-            snapshot.forEach((doc) => {
-                const codingData = doc.data();
-                const coding: CodeType = {
-                    minutes: codingData.minutes,
-                    language: codingData.language,
-                    difficulty: codingData.difficulty,
-                    day: codingData.day
-                };
-                data.push(coding);
+        let unsubscribe: Unsubscribe = () => {}
+        if(user){
+            unsubscribe = onSnapshot(query(collection(db, "coding"), where("userId", "==", user.uid)),
+            (snapshot) => {
+                const data: CodeType[] = []
+                snapshot.forEach((doc) => {
+                    const codingData = doc.data();
+                    const coding: CodeType = {
+                        minutes: codingData.minutes,
+                        language: codingData.language,
+                        difficulty: codingData.difficulty,
+                        day: codingData.day,
+                        userId: codingData.userId
+                    };
+                    data.push(coding);
+                });
+                const sorted = data.sort((a, b) => {
+                    const date_a = new Date(a.day).getTime()
+                    const date_b = new Date(b.day).getTime()
+                    return date_a - date_b
+                })
+                setCoding(sorted);
             });
-            const sorted = data.sort((a, b) => {
-                const date_a = new Date(a.day).getTime()
-                const date_b = new Date(b.day).getTime()
-                return date_a - date_b
-            })
-            setCoding(sorted);
-        });
+        }
 
         // Cleanup the listener when the component unmounts or when the dependency array changes
         return () => {
             unsubscribe();
         }
-    }, [])
+    }, [user])
 
     return { coding, setCoding }
 }

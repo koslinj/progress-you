@@ -1,42 +1,50 @@
 import { ReactElement, createContext, useContext, useEffect, useState } from 'react'
-import { collection, onSnapshot } from "firebase/firestore";
+import { Unsubscribe, collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from '../firebase';
+import { UserAuth } from './AuthContext';
 
 export type RunType = {
-    km: number,
+    km: number
     minutes: number
     day: string
+    userId: string
 }
 
 
 const useRunContext = () => {
     const [runs, setRuns] = useState<RunType[]>([])
+    const { user } = UserAuth();
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "runs"), (snapshot) => {
-            const data: RunType[] = []
-            snapshot.forEach((doc) => {
-                const runData = doc.data();
-                const run: RunType = {
-                    km: runData.km,
-                    minutes: runData.minutes,
-                    day: runData.day
-                };
-                data.push(run);
-            });
-            const sorted = data.sort((a, b) => {
-                const date_a = new Date(a.day).getTime()
-                const date_b = new Date(b.day).getTime()
-                return date_a - date_b
-            })
-            setRuns(sorted);
-        });
+        let unsubscribe: Unsubscribe = () => {}
+        if (user) {
+            unsubscribe = onSnapshot(query(collection(db, "runs"), where("userId", "==", user.uid)),
+                (snapshot) => {
+                    const data: RunType[] = []
+                    snapshot.forEach((doc) => {
+                        const runData = doc.data();
+                        const run: RunType = {
+                            km: runData.km,
+                            minutes: runData.minutes,
+                            day: runData.day,
+                            userId: runData.userId
+                        };
+                        data.push(run);
+                    });
+                    const sorted = data.sort((a, b) => {
+                        const date_a = new Date(a.day).getTime()
+                        const date_b = new Date(b.day).getTime()
+                        return date_a - date_b
+                    })
+                    setRuns(sorted);
+                });
+        }
 
         // Cleanup the listener when the component unmounts or when the dependency array changes
         return () => {
             unsubscribe();
         }
-    }, [])
+    }, [user])
 
     return { runs, setRuns }
 }
