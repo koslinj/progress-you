@@ -3,7 +3,6 @@ import { ActivityType } from '../App'
 import NavIcon from './NavIcons'
 import { useTheme } from '../context/ThemeContext'
 import { UserAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
 import logoutIcon from '../icons/logout_icon.png'
 
 type PropsType = {
