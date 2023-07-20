@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import { ReactNode, useEffect, useState } from 'react';
-import { TailSpin } from 'react-loader-spinner';
+//import { TailSpin } from 'react-loader-spinner';
 
 type PropsType = {
     children: ReactNode | ReactNode[]
@@ -31,18 +31,19 @@ const ProtectedRoute = ({ children }: PropsType) => {
     }
     else if (state === 'pending') {
         return (
-            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                <TailSpin
-                    height="160"
-                    width="160"
-                    color="#ffffff"
-                    ariaLabel="tail-spin-loading"
-                    radius="1"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                    visible={true}
-                />
-            </div>
+            // <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+            //     <TailSpin
+            //         height="160"
+            //         width="160"
+            //         color="#ffffff"
+            //         ariaLabel="tail-spin-loading"
+            //         radius="1"
+            //         wrapperStyle={{}}
+            //         wrapperClass=""
+            //         visible={true}
+            //     />
+            // </div>
+            <div>LOADER.....</div>
         )
     }
     return children;
