@@ -3,6 +3,9 @@ import Running from "./components/Running/Running";
 import Coding from "./components/Coding/Coding";
 import Header from "./components/Header";
 import Home from "./components/Home/Home";
+import { Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Auth from "./components/Auth/Auth";
 
 export type ActivityType = 'running' | 'coding' | 'home'
 
@@ -16,7 +19,7 @@ function App() {
       case 'coding':
         return <Coding />
       case 'home':
-          return <Home />
+        return <Home />
       default:
         throw new Error('unknown type of activity')
     }
@@ -25,10 +28,20 @@ function App() {
   const content = getActivity()
 
   return (
-    <>
-      <Header setActivity={setActivity} />
-      {content}
-    </>
+      <Routes>
+        <Route path='/login' element={<Auth />} />
+        <Route
+          path='/'
+          element={
+            <ProtectedRoute>
+              <>
+                <Header setActivity={setActivity} />
+                {content}
+              </>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
   )
 }
 

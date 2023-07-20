@@ -18,7 +18,7 @@ const Home = () => {
     const { runs } = useRuns()
     const [lastDays, setLastDays] = useState<DayOfActivity[]>([])
     const [diff, setDiff] = useState(0)
-    console.log(diff)
+    
     const dates = useMemo(() => {
         const tempDates: DayOfActivity[] = []
         coding.forEach(item => {

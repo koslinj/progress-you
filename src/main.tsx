@@ -5,15 +5,21 @@ import './index.css'
 import { RunProvider } from './context/RunsContext.tsx'
 import { ThemeProvider } from './context/ThemeContext.tsx'
 import { CodingProvider } from './context/CodingContext.tsx'
+import { BrowserRouter } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <RunProvider>
-        <CodingProvider>
-          <App />
-        </CodingProvider>
-      </RunProvider>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <RunProvider>
+          <CodingProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </CodingProvider>
+        </RunProvider>
+      </ThemeProvider>
+    </AuthProvider>
   </React.StrictMode>,
 )
