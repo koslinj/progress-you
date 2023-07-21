@@ -6,7 +6,10 @@ const Auth = () => {
     const [newUser, setNewUser] = useState(false)
 
     return (
-        newUser ? <Register setNewUser={setNewUser} /> : <Login setNewUser={setNewUser} />
+        <div>
+            <Login newUser={newUser} setNewUser={setNewUser} />
+            <Register newUser={newUser} setNewUser={setNewUser} />
+        </div>
     )
 }
 

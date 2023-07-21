@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext';
 
 type PropsType = {
+  newUser: boolean
   setNewUser: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Login = ({ setNewUser }: PropsType) => {
+const Login = ({ newUser, setNewUser }: PropsType) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -22,10 +23,12 @@ const Login = ({ setNewUser }: PropsType) => {
     }
   };
 
+  const style = newUser ? '-right-1/3 scale-50' : 'right-1/2 scale-100'
+
   return (
-    <div className='flex flex-col p-6 mx-auto text-black rounded-2xl bg-slate-200 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2'>
+    <div className={`flex flex-col duration-500 ${style} p-6 mx-auto text-black rounded-2xl bg-slate-200 absolute top-1/2 -translate-y-1/2 translate-x-1/2`}>
       <div>
-        <h1 className='text-2xl font-bold py-2 text-center'>Log in</h1>
+        <h1 className='text-2xl font-bold py-2 text-center'>Login</h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col py-2'>
