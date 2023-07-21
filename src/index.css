@@ -16,7 +16,7 @@
 
   html {
     color: white;
-    @apply bg-gradient-to-b from-fuchsia-950 to-slate-950 pb-10;
+    @apply bg-gradient-to-b from-fuchsia-950 to-slate-950;
     min-height: 100vh;
   }
 

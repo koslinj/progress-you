@@ -34,10 +34,10 @@ function App() {
           path='/'
           element={
             <ProtectedRoute>
-              <>
+              <div className="pb-10">
                 <Header setActivity={setActivity} />
                 {content}
-              </>
+              </div>
             </ProtectedRoute>
           }
         />

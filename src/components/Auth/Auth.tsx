@@ -6,7 +6,7 @@ const Auth = () => {
     const [newUser, setNewUser] = useState(false)
 
     return (
-        <div>
+        <div className='overflow-x-hidden overflow-y-hidden relative h-screen'>
             <Login newUser={newUser} setNewUser={setNewUser} />
             <Register newUser={newUser} setNewUser={setNewUser} />
         </div>
