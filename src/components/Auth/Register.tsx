@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext';
-import { ToastContainer, toast } from 'react-toastify';
-import { FirebaseError } from 'firebase/app';
+import { toast } from 'react-toastify';
 import { AUTH_ERRORS } from '../../firebase';
 
 type PropsType = {
