@@ -19,3 +19,11 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+export const AUTH_ERRORS: Record<string, string> = {
+  'auth/user-not-found': 'There is no such user!',
+  'auth/wrong-password': 'Wrong password!',
+  'auth/weak-password': 'Password must have at least 6 characters!',
+  'auth/invalid-email': 'Wrong email!',
+  'auth/email-already-in-use': 'Email already in use!',
+};
