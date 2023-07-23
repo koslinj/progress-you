@@ -1,14 +1,13 @@
-import { lazy, useState } from "react";
+import { useState } from "react";
+import Running from "./components/Running/Running";
+import Coding from "./components/Coding/Coding";
+import Header from "./components/Header";
+import Home from "./components/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Auth from "./components/Auth/Auth";
 
 export type ActivityType = 'running' | 'coding' | 'home'
-
-const Home = lazy(() => import("./components/Home/Home"))
-const Running = lazy(() => import("./components/Running/Running"))
-const Coding = lazy(() => import("./components/Coding/Coding"))
-const Header = lazy(() => import("./components/Header"))
-const Auth = lazy(() => import("./components/Auth/Auth"))
 
 function App() {
   const [activity, setActivity] = useState<ActivityType>('home')
