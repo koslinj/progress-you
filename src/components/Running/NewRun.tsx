@@ -34,7 +34,8 @@ const NewRun = () => {
                     km: kilometers,
                     minutes: hours * 60 + minutes,
                     day: date,
-                    userId: user.uid
+                    userId: user.uid,
+                    hasImage: false
                 }
                 await addDoc(collection(db, "runs"), toAdd);
             }

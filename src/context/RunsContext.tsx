@@ -8,6 +8,8 @@ export type RunType = {
     minutes: number
     day: string
     userId: string
+    docId?: string
+    hasImage: boolean
 }
 
 
@@ -27,7 +29,9 @@ const useRunContext = () => {
                             km: runData.km,
                             minutes: runData.minutes,
                             day: runData.day,
-                            userId: runData.userId
+                            userId: runData.userId,
+                            docId: doc.id,
+                            hasImage: runData.hasImage
                         };
                         data.push(run);
                     });
