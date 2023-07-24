@@ -23,7 +23,7 @@ const Run = ({ run }: PropsType) => {
                 </div>
                 <div className='flex justify-between gap-4 items-center mb-4'>
                     <img className='h-10' src={timerIcon} alt="Timer Icon" />
-                    <p className='text-xl'>{Math.floor(run.minutes / 60)}:{String(run.minutes % 60).padStart(2, '0')}</p>
+                    <p className='text-xl'>{Math.floor(run.minutes / 60)}:{String(run.minutes % 60).padStart(2, '0')}:00</p>
                 </div>
                 <div className='flex justify-between gap-4 items-center'>
                     <img className='h-10' src={dateIcon} alt="Date Icon" />
