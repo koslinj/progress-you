@@ -62,8 +62,8 @@ const NewRun = () => {
         setHours(prev => prev - 1)
     }
 
-    const handleDecreaseMinutes = () => {
-        if (minutes === 0) {
+    const handleDecreaseMinutes = (value: number) => {
+        if (minutes - value < 0) {
             return toast.error('You cannot put negative amount of minutes!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -74,7 +74,7 @@ const NewRun = () => {
                 theme: "dark"
             });
         }
-        setMinutes(prev => prev - 1)
+        setMinutes(prev => prev - value)
     }
 
     const handleDecreaseKilometers = () => {
@@ -117,10 +117,16 @@ const NewRun = () => {
                                 <div onClick={() => setHours(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
                             </div>
                             <p className="mt-4 text-xl">Minutes</p>
-                            <div className="flex justify-center items-center bg-slate-900 rounded-xl">
-                                <div onClick={handleDecreaseMinutes} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                            <div className="flex justify-center bg-slate-900 rounded-xl">
+                                <div>
+                                    <div onClick={() => handleDecreaseMinutes(1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
+                                    <div onClick={() => handleDecreaseMinutes(5)} className="text-2xl font-orbitron p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">{'<<'}</div>
+                                </div>
                                 <input className="km-input" type="number" value={minutes.toString()} onChange={(e) => setMinutes(Number(e.target.value))}></input>
-                                <div onClick={() => setMinutes(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
+                                <div>
+                                    <div onClick={() => setMinutes(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
+                                    <div onClick={() => setMinutes(prev => prev + 5)} className="text-2xl font-orbitron p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">{'>>'}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

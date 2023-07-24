@@ -68,6 +68,13 @@ export default function RunModal({ openModal, setOpenModal, run }: PropsType) {
         );
     };
 
+    function calculatePace() {
+        const totalMinutesPerKm = run.minutes / run.km;
+        const paceMinutes = Math.floor(totalMinutesPerKm);
+        const paceSeconds = Math.floor((totalMinutesPerKm - paceMinutes) * 60);
+        return `${paceMinutes}:${String(paceSeconds).padStart(2, '0')}`;
+    }
+
     return (
         <Modal popup dismissible show={openModal === 'dismissible'} onClose={() => setOpenModal(undefined)}>
             <Modal.Header />
@@ -80,7 +87,10 @@ export default function RunModal({ openModal, setOpenModal, run }: PropsType) {
                         Length: {run.km}km
                     </p>
                     <p className="text-xl leading-relaxed">
-                        Time: {Math.floor(run.minutes / 60)}:{String(run.minutes % 60).padStart(2, '0')}
+                        Time: {Math.floor(run.minutes / 60)}:{String(run.minutes % 60).padStart(2, '0')}:00
+                    </p>
+                    <p className="text-xl leading-relaxed">
+                        Pace: {calculatePace()}/km
                     </p>
                     <div className='flex gap-6 flex-wrap justify-center items-center mb-2'>
                         <input type="file" accept="image/*" onChange={selectImage} className='bg-red-400 rounded-xl' />
