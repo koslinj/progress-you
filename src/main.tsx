@@ -7,6 +7,7 @@ import { ThemeProvider } from './context/ThemeContext.tsx'
 import { CodingProvider } from './context/CodingContext.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.tsx'
+import { CaloriesProvider } from './context/CaloriesContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -14,9 +15,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <RunProvider>
           <CodingProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
+            <CaloriesProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </CaloriesProvider>
           </CodingProvider>
         </RunProvider>
       </ThemeProvider>

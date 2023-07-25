@@ -4,6 +4,7 @@ import { Cords } from './Header'
 import runIcon from '../icons/running_icon.png'
 import codeIcon from '../icons/code_icon.png'
 import homeIcon from '../icons/home_icon.png'
+import caloriesIcon from '../icons/calories_icon.png'
 import { useTheme } from '../context/ThemeContext'
 
 type PropsType = {
@@ -27,7 +28,7 @@ const NavIcons = ({ setActivity, setPosition, storedPosition }: PropsType) => {
     return (
         <>
             <img
-                className='z-10 h-12 absolute top-4 left-4 transition-all cursor-pointer'
+                className='z-10 h-10 lg:h-12 absolute top-4 left-4 transition-all cursor-pointer'
                 onClick={(event: React.MouseEvent<HTMLImageElement>) => {
                     animateToIcon(event)
                     setActivity('home')
@@ -37,7 +38,17 @@ const NavIcons = ({ setActivity, setPosition, storedPosition }: PropsType) => {
                 alt='Home Icon'
             />
             <img
-                className='z-10 h-12 transition-all cursor-pointer'
+                className='z-10 h-10 lg:h-12 transition-all cursor-pointer'
+                onClick={(event: React.MouseEvent<HTMLImageElement>) => {
+                    animateToIcon(event)
+                    setActivity('calories')
+                    setColor('bg-green-700')
+                }}
+                src={caloriesIcon}
+                alt='Calories Icon'
+            />
+            <img
+                className='z-10 h-10 lg:h-12 transition-all cursor-pointer'
                 onClick={(event: React.MouseEvent<HTMLImageElement>) => {
                     animateToIcon(event)
                     setActivity('coding')
@@ -47,7 +58,7 @@ const NavIcons = ({ setActivity, setPosition, storedPosition }: PropsType) => {
                 alt='Coding Icon'
             />
             <img
-                className='z-10 h-12 transition-all cursor-pointer'
+                className='z-10 h-10 lg:h-12 transition-all cursor-pointer'
                 onClick={(event: React.MouseEvent<HTMLImageElement>) => {
                     animateToIcon(event)
                     setActivity('running')

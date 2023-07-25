@@ -1,6 +1,6 @@
 import { ReactElement, createContext, useContext, useState } from "react"
 
-type Colors = 'bg-red-700' | 'bg-blue-700' | 'bg-slate-500'
+type Colors = 'bg-red-700' | 'bg-blue-700' | 'bg-slate-500' | 'bg-green-700'
 
 const initState = 'bg-slate-500'
 

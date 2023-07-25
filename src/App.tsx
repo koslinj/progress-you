@@ -6,8 +6,9 @@ import Home from "./components/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Auth from "./components/Auth/Auth";
+import Calories from "./components/Calories/Calories";
 
-export type ActivityType = 'running' | 'coding' | 'home'
+export type ActivityType = 'running' | 'coding' | 'home' | 'calories'
 
 function App() {
   const [activity, setActivity] = useState<ActivityType>('home')
@@ -20,6 +21,8 @@ function App() {
         return <Coding />
       case 'home':
         return <Home />
+      case 'calories':
+        return <Calories />
       default:
         throw new Error('unknown type of activity')
     }
