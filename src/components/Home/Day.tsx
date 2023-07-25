@@ -1,4 +1,4 @@
-import { DayOfActivity } from "./Home"
+import { DayOfActivity } from "./ActivitiesSlider"
 import runIcon from '../../icons/running_icon.png'
 import codeIcon from '../../icons/code_icon.png'
 
