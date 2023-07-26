@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { useCoding } from "../../context/CodingContext"
 import { useRuns } from "../../context/RunsContext"
-import ActivitiesSlider from "./ActivitiesSlider"
+import ActivitiesSlider from "./ActivitiesSwiper"
 
 const Home = () => {
     const { runs } = useRuns()
@@ -22,15 +22,15 @@ const Home = () => {
     return (
         <>
             <ActivitiesSlider />
-            <h1 className="text-center font-orbitron text-5xl my-8">General Statistics</h1>
-            <h2 className="text-center font-orbitron text-2xl">Time spent running: </h2>
-            <p className="text-center font-orbitron text-2xl">{runTime} minutes</p>
-            <p className="text-center font-orbitron text-2xl">{(runTime/60).toFixed(2)} hours</p>
-            <p className="text-center font-orbitron text-2xl">{(runTime/60/24).toFixed(2)} days</p>
-            <h2 className="text-center font-orbitron text-2xl mt-8">Time spent coding: </h2>
-            <p className="text-center font-orbitron text-2xl">{codingTime} minutes</p>
-            <p className="text-center font-orbitron text-2xl">{(codingTime/60).toFixed(2)} hours</p>
-            <p className="text-center font-orbitron text-2xl">{(codingTime/60/24).toFixed(2)} days</p>
+            <h1 className="text-center  text-5xl my-8">General Statistics</h1>
+            <h2 className="text-center  text-2xl">Time spent running: </h2>
+            <p className="text-center  text-2xl">{runTime} minutes</p>
+            <p className="text-center  text-2xl">{(runTime/60).toFixed(2)} hours</p>
+            <p className="text-center  text-2xl">{(runTime/60/24).toFixed(2)} days</p>
+            <h2 className="text-center  text-2xl mt-8">Time spent coding: </h2>
+            <p className="text-center  text-2xl">{codingTime} minutes</p>
+            <p className="text-center  text-2xl">{(codingTime/60).toFixed(2)} hours</p>
+            <p className="text-center  text-2xl">{(codingTime/60/24).toFixed(2)} days</p>
         </>
     )
 }

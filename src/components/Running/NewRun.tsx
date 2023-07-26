@@ -120,12 +120,12 @@ const NewRun = () => {
                             <div className="flex justify-center bg-slate-900 rounded-xl">
                                 <div>
                                     <div onClick={() => handleDecreaseMinutes(1)} className="text-4xl p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">-</div>
-                                    <div onClick={() => handleDecreaseMinutes(5)} className="text-2xl font-orbitron p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">{'<<'}</div>
+                                    <div onClick={() => handleDecreaseMinutes(5)} className="text-2xl  p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">{'<<'}</div>
                                 </div>
                                 <input className="km-input" type="number" value={minutes.toString()} onChange={(e) => setMinutes(Number(e.target.value))}></input>
                                 <div>
                                     <div onClick={() => setMinutes(prev => prev + 1)} className="text-4xl p-4 hover:bg-slate-950 rounded-r-xl w-16 flex justify-center items-center cursor-pointer select-none">+</div>
-                                    <div onClick={() => setMinutes(prev => prev + 5)} className="text-2xl font-orbitron p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">{'>>'}</div>
+                                    <div onClick={() => setMinutes(prev => prev + 5)} className="text-2xl  p-4 hover:bg-slate-950 rounded-l-xl w-16 flex justify-center items-center cursor-pointer select-none">{'>>'}</div>
                                 </div>
                             </div>
                         </div>

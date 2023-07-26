@@ -16,7 +16,7 @@
 
   html {
     color: white;
-    @apply bg-gradient-to-b from-fuchsia-950 to-slate-950;
+    @apply bg-gradient-to-b from-fuchsia-950 to-slate-950 font-orbitron;
     min-height: 100vh;
   }
 
@@ -49,7 +49,7 @@
 
   .km-input,
   .km-input:focus {
-    @apply bg-slate-800 border-none text-4xl text-center w-24 py-4;
+    @apply bg-slate-800 border-none text-4xl text-center w-32 py-4;
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -57,7 +57,7 @@
 
   .date-input,
   .date-input:focus {
-    @apply bg-slate-800 border-none text-2xl text-center w-48 py-4 rounded-xl;
+    @apply bg-slate-800 border-none text-2xl text-center w-60 py-4 rounded-xl;
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;

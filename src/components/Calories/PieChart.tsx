@@ -16,7 +16,6 @@ const PieChart = ({ macro }: PropsType) => {
     const [data, setData] = useState<ChartDataType[]>([])
 
     useEffect(() => {
-        console.log(macro)
         const temp: ChartDataType[] = []
         temp.push({ id: 'carbs', label: 'carbs', value: macro.carbs })
         temp.push({ id: 'protein', label: 'protein', value: macro.protein })
@@ -40,7 +39,7 @@ const PieChart = ({ macro }: PropsType) => {
                     }
                 }}
                 data={data}
-                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
                 innerRadius={0.6}
                 padAngle={3}
                 cornerRadius={6}
