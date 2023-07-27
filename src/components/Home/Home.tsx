@@ -24,13 +24,13 @@ const Home = () => {
             <ActivitiesSlider />
             <h1 className="text-center  text-5xl my-8">General Statistics</h1>
             <h2 className="text-center  text-2xl">Time spent running: </h2>
-            <p className="text-center  text-2xl">{runTime} minutes</p>
-            <p className="text-center  text-2xl">{(runTime/60).toFixed(2)} hours</p>
-            <p className="text-center  text-2xl">{(runTime/60/24).toFixed(2)} days</p>
+            <p className="text-center  text-2xl"><span className="font-semibold text-3xl tracking-widest">{runTime}</span> minutes</p>
+            <p className="text-center  text-2xl"><span className="font-semibold text-3xl tracking-widest">{(runTime/60).toFixed(2)}</span> hours</p>
+            <p className="text-center  text-2xl"><span className="font-semibold text-3xl tracking-widest">{(runTime/60/24).toFixed(2)}</span> days</p>
             <h2 className="text-center  text-2xl mt-8">Time spent coding: </h2>
-            <p className="text-center  text-2xl">{codingTime} minutes</p>
-            <p className="text-center  text-2xl">{(codingTime/60).toFixed(2)} hours</p>
-            <p className="text-center  text-2xl">{(codingTime/60/24).toFixed(2)} days</p>
+            <p className="text-center  text-2xl"><span className="font-semibold text-3xl tracking-widest">{codingTime}</span> minutes</p>
+            <p className="text-center  text-2xl"><span className="font-semibold text-3xl tracking-widest">{(codingTime/60).toFixed(2)}</span> hours</p>
+            <p className="text-center  text-2xl"><span className="font-semibold text-3xl tracking-widest">{(codingTime/60/24).toFixed(2)}</span> days</p>
         </>
     )
 }
