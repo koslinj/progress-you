@@ -2,6 +2,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { useEffect, useState } from "react";
 import addIcon from '../../icons/add_icon.png'
+import dateIcon from '../../icons/date_icon.png'
 import { useTheme } from "../../context/ThemeContext";
 import { ToastContainer, toast } from "react-toastify";
 import { UserAuth } from "../../context/AuthContext";
@@ -13,6 +14,13 @@ const NewMacro = () => {
     const [fat, setFat] = useState(70)
     const [kcal, setKcal] = useState((carbs + protein) * 4 + fat * 9)
 
+    let objectDate = new Date();
+    let day = objectDate.getDate();
+    let month = String(objectDate.getMonth() + 1).padStart(2, '0');
+    let year = objectDate.getFullYear();
+    let format = year + "-" + month + "-" + day
+    const [date, setDate] = useState(format)
+
     const { color } = useTheme()
 
     const { user } = UserAuth();
@@ -20,7 +28,7 @@ const NewMacro = () => {
     useEffect(() => {
         setKcal((carbs + protein) * 4 + fat * 9)
     }, [carbs, protein, fat])
-    
+
 
     const handleNewMacro = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -31,6 +39,7 @@ const NewMacro = () => {
                     protein: protein,
                     fat: fat,
                     kcal: kcal,
+                    day: date,
                     userId: user.uid
                 }
                 await addDoc(collection(db, "calories"), toAdd);
@@ -106,8 +115,14 @@ const NewMacro = () => {
                             </div>
                         </div>
                     </div>
-                    <p className="text-4xl my-8">Kcal: {kcal}</p>
-                    <div onClick={handleNewMacro} className="bg-slate-800 rounded-full mt-4 p-6 hover:scale-125 duration-300 cursor-pointer">
+                    <p className="text-4xl font-semibold mt-4 mb-8">Kcal: {kcal}</p>
+                    <div className="flex justify-center items-center gap-8">
+                        <img src={dateIcon} alt="Distance Icon" className="w-16" />
+                        <div className="flex justify-center items-center">
+                            <input className="date-input" type='date' value={date} onChange={(e) => setDate(e.target.value)}></input>
+                        </div>
+                    </div>
+                    <div onClick={handleNewMacro} className="bg-slate-800 rounded-full mt-8 p-6 hover:scale-125 duration-300 cursor-pointer">
                         <img className="w-20 invert" src={addIcon} alt="Add Icon" />
                     </div>
                 </div>

@@ -27,28 +27,36 @@ const PieChart = ({ macro }: PropsType) => {
 
     return (
         <>
-            <ResponsivePie
-                theme={{
-                    tooltip: {
-                        container: {
-                            background: '#000000',
-                        },
-                        basic: {
-                            color: '#81FF81'
+            <div className={`px-2 py-1 rounded-xl text-2xl`}>
+                {macro.day}
+            </div>
+            <div className={`h-[280px] w-[280px]`}>
+                <ResponsivePie
+                    theme={{
+                        tooltip: {
+                            container: {
+                                background: '#000000',
+                            },
+                            basic: {
+                                color: '#81FF81'
+                            }
                         }
-                    }
-                }}
-                data={data}
-                margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-                innerRadius={0.6}
-                padAngle={3}
-                cornerRadius={6}
-                activeOuterRadiusOffset={8}
-                borderWidth={3}
-                colors={['red', '#5F7FFF', '#FCEF3B']}
-                enableArcLinkLabels={false}
-                enableArcLabels={false}
-            />
+                    }}
+                    data={data}
+                    margin={{ top: 0, right: 20, bottom: 0, left: 20 }}
+                    innerRadius={0.6}
+                    padAngle={3}
+                    cornerRadius={6}
+                    activeOuterRadiusOffset={8}
+                    borderWidth={3}
+                    colors={['red', '#5F7FFF', '#FCEF3B']}
+                    enableArcLinkLabels={false}
+                    enableArcLabels={false}
+                />
+            </div>
+            <div className={`px-2 py-1 rounded-xl text-xl`}>
+                Kcal: {macro.kcal}
+            </div>
         </>
     )
 }

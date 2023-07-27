@@ -9,6 +9,7 @@ export type MacroType = {
     protein: number
     fat: number
     kcal: number
+    day: string
     userId: string
 }
 
@@ -29,11 +30,17 @@ const useCaloriesContext = () => {
                             protein: caloriesData.protein,
                             fat: caloriesData.fat,
                             kcal: caloriesData.kcal,
+                            day: caloriesData.day,
                             userId: caloriesData.userId
                         };
                         data.push(macro);
                     });
-                    setCalories(data);
+                    const sorted = data.sort((a, b) => {
+                        const date_a = new Date(a.day).getTime()
+                        const date_b = new Date(b.day).getTime()
+                        return date_a - date_b
+                    })
+                    setCalories(sorted);
                 });
         }
 

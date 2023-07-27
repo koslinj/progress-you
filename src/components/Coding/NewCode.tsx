@@ -17,7 +17,7 @@ const NewCode = () => {
     const [language, setLanguage] = useState('')
     const [difficulty, setDifficulty] = useState<DifficultyType>(3)
 
-    let objectDate = new Date('2023-7-21');
+    let objectDate = new Date();
     let day = objectDate.getDate();
     let month = String(objectDate.getMonth() + 1).padStart(2, '0');
     let year = objectDate.getFullYear();

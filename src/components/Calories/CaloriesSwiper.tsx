@@ -20,19 +20,19 @@ const CaloriesSwiper = () => {
                 slidesPerView={large ? 4 : medium ? 2 : 1}
                 freeMode={true}
                 modules={[FreeMode]}
-                className="my-2 relative w-screen"
+                className="mt-8 relative w-screen"
             >
                 <SlidePrevButton />
                 {calories ? calories.map((macro, i) => {
                     return (
-                        <SwiperSlide key={i} className={`h-[300px] w-[300px]`}>
+                        <SwiperSlide className="flex flex-col items-center" key={i}>
                             <PieChart macro={macro} />
                         </SwiperSlide>
                     )
                 }) : <div>Loading...</div>}
                 <SlideNextButton />
             </Swiper >
-            <div className="flex justify-center gap-x-10 items-center flex-wrap">
+            <div className="flex justify-center gap-x-10 items-center flex-wrap mt-4">
                 <div className="flex justify-center items-center gap-1 lg:gap-2">
                     <div className={`w-6 h-6 ${tailwindColors[0]}`} />
                     <p className="text-lg lg:text-2xl ">carbs</p>
