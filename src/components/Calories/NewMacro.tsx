@@ -15,7 +15,7 @@ const NewMacro = () => {
     const [kcal, setKcal] = useState((carbs + protein) * 4 + fat * 9)
 
     let objectDate = new Date();
-    let day = objectDate.getDate();
+    let day = String(objectDate.getDate()).padStart(2, '0');
     let month = String(objectDate.getMonth() + 1).padStart(2, '0');
     let year = objectDate.getFullYear();
     let format = year + "-" + month + "-" + day

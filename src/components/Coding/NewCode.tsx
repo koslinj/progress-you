@@ -18,7 +18,7 @@ const NewCode = () => {
     const [difficulty, setDifficulty] = useState<DifficultyType>(3)
 
     let objectDate = new Date();
-    let day = objectDate.getDate();
+    let day = String(objectDate.getDate()).padStart(2, '0');
     let month = String(objectDate.getMonth() + 1).padStart(2, '0');
     let year = objectDate.getFullYear();
     let format = year + "-" + month + "-" + day
@@ -96,7 +96,7 @@ const NewCode = () => {
             <div>
                 <input onChange={(e) => setLanguage(e.target.value)} className='text-input' type='text'></input>
             </div>
-            <div className="flex justify-between items-center gap-8 mt-6">
+            <div className="flex flex-wrap justify-center items-center gap-x-8 mt-6">
                 <img src={timerIcon} alt="Distance Icon" className="w-16" />
                 <div className="flex flex-col items-center">
                     <p className="text-xl">Hours</p>
@@ -121,7 +121,7 @@ const NewCode = () => {
             </div>
             <p className="mt-8 mb-2 text-xl">Difficulty</p>
             <StarRating difficulty={difficulty} setDifficulty={setDifficulty} />
-            <div className="flex justify-between gap-8 mt-10">
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-10">
                 <img src={dateIcon} alt="Distance Icon" className="w-16" />
                 <div className="flex justify-center items-center">
                     <input className="date-input" type='date' value={date} onChange={(e) => setDate(e.target.value)}></input>

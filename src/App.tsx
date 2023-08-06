@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Auth from "./components/Auth/Auth";
 import Calories from "./components/Calories/Calories";
+import Footer from "./components/Footer";
 
 export type ActivityType = 'running' | 'coding' | 'home' | 'calories'
 
@@ -37,9 +38,10 @@ function App() {
           path='/'
           element={
             <ProtectedRoute>
-              <div className="pb-10">
+              <div>
                 <Header setActivity={setActivity} />
                 {content}
+                <Footer />
               </div>
             </ProtectedRoute>
           }
